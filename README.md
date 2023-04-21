@@ -1,8 +1,8 @@
 # Modules Description
 
-### Module 00: This first module of C++ is designed to help you understand the specifities of the language when compared to C. Time to dive into Object Oriented Programming!
+#### Module 00: This first module of C++ is designed to help you understand the specifities of the language when compared to C. Time to dive into Object Oriented Programming!
 
-### Module 01: This module is designed to help you understand the memory allocation, reference, pointers to members and the usage of the switch in CPP. 
+#### Module 01: This module is designed to help you understand the memory allocation, reference, pointers to members and the usage of the switch in CPP. 
 
 #### Module 02: This module is designed to help you understand Ad-hoc polymorphism, overloads and orthodox canonical classes in CPP. 
 
