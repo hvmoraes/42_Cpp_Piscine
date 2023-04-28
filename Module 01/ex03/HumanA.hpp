@@ -5,6 +5,6 @@ class HumanA {
         Weapon *weapon;
         std::string name;
         void attack();
-				HumanA(std::string nameArg, Weapon *weaponArg);
-				~HumanA();
+		HumanA(std::string nameArg, Weapon *weaponArg);
+		~HumanA();
 };

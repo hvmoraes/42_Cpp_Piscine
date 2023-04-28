@@ -21,8 +21,9 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 
-	std::string fileName = (std::string)argv[1] + ".replace";
-	std::ofstream outFile(fileName);
+	std::string fileName = argv[1];
+	fileName += ".replace";
+	std::ofstream outFile(fileName.c_str());
 	if (!outFile.is_open()) {
 		std::cout << "Couldn't open file " << fileName << std::endl;
 		return -1;

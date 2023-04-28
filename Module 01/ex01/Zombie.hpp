@@ -3,6 +3,7 @@
 
 #include <string.h>
 #include <iostream>
+#include <stdlib.h>
 
 class Zombie {
     private:

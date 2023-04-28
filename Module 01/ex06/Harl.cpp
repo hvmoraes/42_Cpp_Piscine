@@ -48,23 +48,22 @@ void Harl::complain(std::string level) {
 	{
 	case (0):
 		for (int i = index; i < 4; i++)
-				(this->*(comp[i]))();
+			(this->*(comp[i]))();
 		break;
 	case (1):
-	  for (int i = index; i < 4; i++)
+		for (int i = index; i < 4; i++)
 		  (this->*(comp[i]))();
-			break;
+		break;
 	case (2):
-	  for (int i = index; i < 4; i++)
+		for (int i = index; i < 4; i++)
 			(this->*(comp[i]))();
-			break;
+		break;
 	case (3):
 		for (int i = index; i < 4; i++)
-	  	(this->*(comp[i]))();
-		  break;
+	  		(this->*(comp[i]))();
+		break;
 	default:
 		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 		break;
-	}
-	
+	}	
 }

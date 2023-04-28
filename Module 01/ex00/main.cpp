@@ -10,7 +10,7 @@ int main (int argc, char **argv) {
         randomChump(zombie2);
         randomChump(zombie3);
     } else {
-        for (int i = 0; i < argc; i++) {
+        for (int i = 1; i < argc; i++) {
             randomChump(argv[i]);
         }
     }

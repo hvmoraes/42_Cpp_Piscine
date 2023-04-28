@@ -6,6 +6,6 @@ class HumanB {
         std::string name;
         void attack();
         void setWeapon(Weapon *weapon);
-				HumanB(std::string nameArg);
-				~HumanB();
+		HumanB(std::string nameArg);
+		~HumanB();
 };
