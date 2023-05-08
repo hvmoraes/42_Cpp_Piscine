@@ -3,12 +3,10 @@ RED				=	\033[0;31m
 YELLOW			=	\033[0;33m
 END				=	\033[0m
 
-NAME	=	bsp
+NAME	=	claptrap
 
 SRCS	=	main.cpp 	\
-				Fixed.cpp	\
-				Point.cpp	\
-				bsp.cpp		\
+				ClapTrap.cpp	\
 
 OBJS	=	${SRCS:.cpp=.o}
 
@@ -16,7 +14,7 @@ CC		=	c++
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 all:		$(NAME)
-			@echo "$(GREEN)Bsp successfully compiled!$(END)"
+			@echo "$(GREEN)ClapTrap successfully compiled!$(END)"
 			@sleep 0.5
 			@clear
 
@@ -25,7 +23,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			@clear
-			@echo "$(YELLOW)Compiling Bsp...$(END)"
+			@echo "$(YELLOW)Compiling ClapTrap...$(END)"
 			@$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 
 clean:
