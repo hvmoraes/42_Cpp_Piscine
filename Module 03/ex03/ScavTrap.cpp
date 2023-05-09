@@ -1,20 +1,22 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-	std::cout << "\033[38;2;201;255;99mScavTrap\033[0m " << this->_name << " created!" << std::endl;
+ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name) {
+	this->_name = name;
 	this->_attackDmg = 20;
 	this->_energyPts = 50;
 	this->_hitPts = 100;
+	this->_initHitPts = this->_hitPts;
 }
 
 ScavTrap::ScavTrap() {
+	this->_name = "";
 	this->_attackDmg = 20;
 	this->_energyPts = 50;
 	this->_hitPts = 100;
+	this->_initHitPts = this->_hitPts;
 }
 
 ScavTrap::~ScavTrap() {
-	std::cout << "\033[38;2;201;255;99mScavTrap\033[0m " << this->_name << " died..." << std::endl;
 }
 
 void ScavTrap::guardGate() {

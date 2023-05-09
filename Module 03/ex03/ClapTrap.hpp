@@ -1,17 +1,20 @@
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
 
+#pragma once
+
 #include <iostream>
 
 class ClapTrap {
 	protected:
+		ClapTrap();
 		std::string _name;
 		int _hitPts;
+		int _initHitPts;
 		int _energyPts;
 		int _attackDmg;
 	public:
-		ClapTrap(std::string name);
-		ClapTrap();
+		ClapTrap(const std::string name);
 		~ClapTrap();
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
