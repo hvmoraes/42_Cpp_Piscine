@@ -1,46 +1,46 @@
-GREEN			=	\033[0;32m
-RED				=	\033[0;31m
-YELLOW			=	\033[0;33m
-END				=	\033[0m
+GREEN		=	\033[0;32m
+RED			=	\033[0;31m
+YELLOW	=	\033[0;33m
+END			=	\033[0m
 
-NAME	=	animal
+NAME		=	animal
 
-SRCS	=	main.cpp 		\
-			Animal.cpp		\
-			Dog.cpp			\
-			Cat.cpp			\
-			WrongCat.cpp	\
-			WrongAnimal.cpp	\
+SRCS		=	$(wildcard src/*.cpp)
 
-OBJS	=	${SRCS:.cpp=.o}
+OBJ_DIR =	obj
+OBJS    =	$(addprefix $(OBJ_DIR)/,$(notdir $(SRCS:.cpp=.o)))
 
-CC		=	c++
-CFLAGS	=	-Wall -Wextra -Werror -std=c++98
+CC			=	c++
+CFLAGS	=	-Wall -Wextra -Werror -std=c++98 -I./inc
+RM			= rm -rf
 
-all:		$(NAME)
-			@echo "$(GREEN)Animal successfully compiled!$(END)"
-			@sleep 0.5
-			@clear
+all:			$(NAME)
+					@echo "$(GREEN)Animal successfully compiled!$(END)"
+					@sleep 0.5
+					@clear
 
-.cpp.o:
-			@$(CC) $(CFLAGS) -c $< -o $(<:.cpp=.o)
+$(OBJ_DIR)/%.o:	src/%.cpp | $(OBJ_DIR)
+								@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
-			@clear
-			@echo "$(YELLOW)Compiling Animal...$(END)"
-			@$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
+					@clear
+					@echo "$(YELLOW)Compiling Animal...$(END)"
+					@$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
+
+$(OBJ_DIR):
+					@mkdir -p $(OBJ_DIR)
 
 clean:
-			@$(RM)  $(OBJS)
-			@clear
-			@echo "$(RED)All objects deleted!$(END)"
+					@$(RM) $(OBJ_DIR)
+					@clear
+					@echo "$(RED)All objects deleted!$(END)"
 
 fclean:		clean
-			@$(RM) $(NAME)
-			@echo "$(RED)All executables deleted!$(END)"
-			@sleep 0.5
-			@clear
+					@$(RM) $(NAME)
+					@echo "$(RED)All executables deleted!$(END)"
+					@sleep 0.5
+					@clear
 
-re:			fclean all
+re:				fclean all
 
 .PHONY:		all clean fclean re
