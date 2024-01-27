@@ -7,17 +7,17 @@ class Bureaucrat;
 
 class AForm {
 	private:
-		
-	protected:
 		const std::string _name;
 		bool _sign;
 		const int _sign_grade;
 		const int _exec_grade;
+	protected:
+		
+	public:
 		AForm();
 		AForm(std::string name);
 		AForm(int sign_grade, int exec_grade);
 		AForm(std::string name, int sign_grade, int exec_grade);
-	public:
 		virtual ~AForm();
 		AForm(const AForm& copy);
 		AForm& operator=(const AForm& copy);

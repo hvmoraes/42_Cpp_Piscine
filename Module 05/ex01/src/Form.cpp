@@ -20,7 +20,7 @@ Form::Form(std::string name) : _name(name), _sign(false), _sign_grade(50), _exec
 Form::Form(int sign_grade, int exec_grade) : _name("Alberto"), _sign(false), _sign_grade(sign_grade), _exec_grade(exec_grade) {
 	if (sign_grade > 150 || exec_grade > 150)
 		throw GradeTooLowException();
-	else if (sign_grade < 0 || exec_grade < 0)
+	else if (sign_grade < 1 || exec_grade < 1)
 		throw GradeTooHighException();
 	else
 		std::cout << "\033[34m" << "Form created for " << this->_name << " with sign grade " << this->_sign_grade << " and execution grade " << this->_exec_grade << "\033[0m" << std::endl;

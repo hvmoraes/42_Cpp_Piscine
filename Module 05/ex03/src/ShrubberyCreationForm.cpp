@@ -58,4 +58,3 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	outfile.close();
 	std::cout << "\033[33mSuccessfully wrote an ASCII forest inside " << filename << "\033[0m" << std::endl;
 }
-

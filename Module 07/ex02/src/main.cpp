@@ -18,11 +18,13 @@ int main() {
 	intArray[2] = 3;
 	intArray[4] = 2;
 	intArrayCopy[1] = 5;
+	arrayClass<int> intArrayCopyWValues(intArray);
 
 	print(stringArray[1]);
 	print(stringArray.size());
 	print(intArray[2]);
 	print(intArrayCopy[2]);
+	print(intArrayCopyWValues[2]);
 	print(intArray[1]);
 	print(intArrayCopy[1]);
 

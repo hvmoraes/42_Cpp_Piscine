@@ -3,7 +3,7 @@ RED			=	\033[0;31m
 YELLOW	=	\033[0;33m
 END			=	\033[0m
 
-NAME		=	easyfind
+NAME		=	span
 
 SRCS		=	$(wildcard src/*.cpp)
 
@@ -15,7 +15,7 @@ CFLAGS	=	-Wall -Wextra -Werror -I./inc -fsanitize=address -std=c++98
 RM			= rm -rf
 
 all:			$(NAME)
-					@echo "$(GREEN)easyfind successfully compiled!$(END)"
+					@echo "$(GREEN)span successfully compiled!$(END)"
 					@sleep 0.5
 					@clear
 
@@ -24,7 +24,7 @@ $(OBJ_DIR)/%.o:	src/%.cpp | $(OBJ_DIR)
 
 $(NAME):	$(OBJS)
 					@clear
-					@echo "$(YELLOW)Compiling easyfind...$(END)"
+					@echo "$(YELLOW)Compiling span...$(END)"
 					@$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 
 $(OBJ_DIR):

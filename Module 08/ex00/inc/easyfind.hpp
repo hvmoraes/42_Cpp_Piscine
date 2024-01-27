@@ -1,10 +1,18 @@
 #pragma once
 
+#include <iostream>
 #include <algorithm>
 #include <array>
-#include <iostream>
+#include <deque>
+#include <forward_list>
+#include <list>
 
 template <typename T>
-int easyfind(const T& array, int find);
+void easyfind(const T& array, int find);
 
-
+class notFoundException : public std::exception {
+	public:
+		virtual const char* what() const throw() {
+			return ("not found");
+		};
+};

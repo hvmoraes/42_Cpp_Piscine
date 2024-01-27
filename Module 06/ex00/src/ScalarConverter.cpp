@@ -123,7 +123,7 @@ void	ScalarConverter::printOutput(void)const
 		std::cout << "char: impossible" << std::endl;
 
 	// display int
-	std::cout << "getInt() = " << this->getInt() << " max int = " << std::numeric_limits<int>::max() << std::endl;
+	//std::cout << "getInt() = " << this->getInt() << " max int = " << std::numeric_limits<int>::max() << std::endl;
 	if (this->getType() == NAN_INF)
 		std::cout << "int: impossible" << std::endl;
 	else if (this->getInt() > std::numeric_limits<int>::max() || this->getInt() < std::numeric_limits<int>::min())

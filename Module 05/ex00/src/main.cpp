@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 10:56:42 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/26 13:05:56 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2024/01/27 13:18:57 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ int	main(int argc, char **argv)
 		}
 		catch (Bureaucrat::GradeTooHighException &e)
 		{
-			std::cout << argv[1] << " can't be created with less than 0 of atribute grade!" << std::endl;
+			std::cout << argv[1] << " can't be created with less than 1 of atribute grade!" << std::endl;
 		}
+	}
+	else if (argc != 1)
+	{
+		std::cout << "Usage: ./bureaucrat [name] [grade]" << std::endl;
 	}
 	else
 	{

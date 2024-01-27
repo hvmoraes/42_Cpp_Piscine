@@ -1,11 +1,12 @@
 #include "../inc/easyfind.hpp"
 
 template <typename T>
-int easyfind(const T& array, int find) {
-	auto f = std::find(array.begin(), array.end(), find);
-	if (f != array.end()) {
-		return(std::distance(array.begin(), f));
+void easyfind(const T& array, int find) {
+	if (std::find(array.begin(), array.end(), find) != array.end()) {
+		std::cout << "Found " << find << " at index " << std::distance(array.begin(), std::find(array.begin(), array.end(), find))  << std::endl;
 	}
-	//throw(something);
-	return (-1);
+	else {
+		std::cout << find << " ";
+		throw(notFoundException());
+	}
 }
