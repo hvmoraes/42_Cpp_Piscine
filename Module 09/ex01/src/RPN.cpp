@@ -25,11 +25,11 @@ int	RPN::mult(int *flag) {
 		return (0);
 	}
 	int i,j;
-	i = stoi(this->stack.top());
+	i = this->stack.top();
 	this->stack.pop();
-	j = stoi(this->stack.top());
+	j = this->stack.top();
 	this->stack.pop();
-	this->stack.push(std::to_string(j * i));
+	this->stack.push(j * i);
 	return (1);
 }
 
@@ -39,11 +39,11 @@ int	RPN::div(int *flag) {
 		return (0);
 	}
 	int i,j;
-	i = stoi(this->stack.top());
+	i = this->stack.top();
 	this->stack.pop();
-	j = stoi(this->stack.top());
+	j = this->stack.top();
 	this->stack.pop();
-	this->stack.push(std::to_string(j / i));
+	this->stack.push(j / i);
 	return (1);
 }
 
@@ -53,11 +53,11 @@ int	RPN::sub(int *flag) {
 		return (0);
 	}
 	int i,j;
-	i = stoi(this->stack.top());
+	i = this->stack.top();
 	this->stack.pop();
-	j = stoi(this->stack.top());
+	j = this->stack.top();
 	this->stack.pop();
-	this->stack.push(std::to_string(j - i));
+	this->stack.push(j - i);
 	return (1);
 }
 
@@ -67,18 +67,20 @@ int	RPN::add(int *flag) {
 		return (0);
 	}
 	int i,j;
-	i = stoi(this->stack.top());
+	i = this->stack.top();
 	this->stack.pop();
-	j = stoi(this->stack.top());
+	j = this->stack.top();
 	this->stack.pop();
-	this->stack.push(std::to_string(j + i));
+	this->stack.push((j + i));
 	return (1);
-}
+} 	
 
 int RPN::initStack() {
 	int flag = 0;
 	for (size_t i = 0; i < this->input.size(); i++) {
-		std::string str (1, this->input[i]);
+		std::string str;
+		str += this->input[i];
+		const	char *strfinal = str.c_str();
 		if (this->input[i] != ' ') {
 			if (this->input[i] == '*' && this->mult(&flag))
 				continue;
@@ -89,7 +91,7 @@ int RPN::initStack() {
 			else if (this->input[i] == '+' &&this->add(&flag))
 				continue;
 			else if (std::isdigit(this->input[i]))
-				this->stack.push(str);
+				this->stack.push(atof(strfinal));
 			else if (!flag) {
 				out << "\033[31mError: invalid character inserted => " << this->input[i] << "\033[0m" << el;
 				return (0);

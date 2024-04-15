@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <limits.h>
 
 class Span {
 	private:
@@ -24,19 +25,17 @@ class Span {
 		int shortestSpan();
 		int longestSpan();
 		void	addMultiple(int total, int start, int end);
-};
-
-class arrayFull : public std::exception {
-	public:
-		virtual const char* what() const throw() {
-			return ("Array is full!");
+		class arrayFull : public std::exception {
+			public:
+				const char* what() const throw() {
+					return ("Array is full!");
+				};
 		};
-};
-
-class noSpan : public std::exception {
-	public:
-		virtual const char* what() const throw() {
-			return ("No span possible!");
+		class noSpan : public std::exception {
+			public:
+				const char* what() const throw() {
+					return ("No span possible!");
+				};
 		};
 };
 

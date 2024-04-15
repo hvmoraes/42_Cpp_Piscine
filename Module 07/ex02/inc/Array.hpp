@@ -10,7 +10,7 @@ class arrayClass {
 		T *array;
 		int _size;
 	public:
-		arrayClass() :   array(nullptr), _size(0) {};
+		arrayClass() :   array(NULL), _size(0) {};
 		arrayClass(unsigned int n);
 		arrayClass(const arrayClass &copy);
 		~arrayClass() {

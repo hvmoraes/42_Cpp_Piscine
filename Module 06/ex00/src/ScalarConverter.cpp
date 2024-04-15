@@ -66,7 +66,7 @@ void ScalarConverter::fromChar(void) {
 }
 
 void ScalarConverter::fromInt(void) {
-	this->_int = atof(this->getInput().c_str());
+	this->_int = atoi(this->getInput().c_str());
 	this->_double = static_cast<double>(this->getInt());
 	this->_char = static_cast<unsigned char>(this->getInt());
 	this->_float = static_cast<float>(this->getInt());
@@ -126,7 +126,7 @@ void	ScalarConverter::printOutput(void)const
 	//std::cout << "getInt() = " << this->getInt() << " max int = " << std::numeric_limits<int>::max() << std::endl;
 	if (this->getType() == NAN_INF)
 		std::cout << "int: impossible" << std::endl;
-	else if (this->getInt() > std::numeric_limits<int>::max() || this->getInt() < std::numeric_limits<int>::min())
+	else if (atof(this->getInput().c_str()) > std::numeric_limits<int>::max() || atof(this->getInput().c_str()) < std::numeric_limits<int>::min())
 		std::cout << "int (overflowed): " << this->getInt() << std::endl;
 	else
 		std::cout << "int: " << this->getInt() << std::endl;

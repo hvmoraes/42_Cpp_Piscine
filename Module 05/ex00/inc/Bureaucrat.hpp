@@ -2,6 +2,7 @@
 #define BUREAUCRAT_HPP
 
 #include <iostream>
+#include <stdlib.h>
 
 class Bureaucrat {
 	private:

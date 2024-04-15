@@ -4,6 +4,7 @@
 
 template <class T>
 arrayClass<T>::arrayClass(unsigned int n) : array(new T[n]), _size(n) {
+	print("Constructor called!");
 	for (unsigned int i = 0; i < n; i++)
 		array[i] = T();
 }

@@ -1,6 +1,6 @@
 #include "../inc/Span.hpp"
 
-Span::Span(unsigned int N) : total(N) {
+Span::Span(unsigned int N) : total(N), index(0) {
 	//std::cout << "Span constructor called" << std::endl;
 }
 
@@ -20,7 +20,7 @@ Span& Span::operator=(const Span& copy) {
 }
 
 void Span::addNumber(int nbr) {
-	if (index < this->total) {
+	if (this->index < this->total) {
 		//std::cout << "Number " << nbr << " added!" << std::endl;
 		this->vector.push_back(nbr);
 		this->index++;
@@ -61,7 +61,7 @@ void Span::addMultiple(int total, int start, int end) {
 		try {
 			this->addNumber(rand()%(end - start + 1) + start);
 		}
-		catch(const std::exception& e) {
+		catch(Span::arrayFull& e) {
 			std::cerr << e.what() << '\n';
 			break;
 		}

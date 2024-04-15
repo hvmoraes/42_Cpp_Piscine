@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stack>
+#include <cstdlib>
 
 #define print(x) std::cout << x << std::endl
 #define out std::cout
@@ -15,7 +16,7 @@ class RPN {
 		
 	public:
 		std::string input;
-		std::stack<std::string> stack;
+		std::stack<float> stack;
 
 		RPN(char *input);
 		~RPN();

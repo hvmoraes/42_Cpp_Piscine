@@ -2,6 +2,9 @@
 #define CONVERSION_HPP
 
 #include <iostream>
+#include <limits>
+#include <limits.h>
+#include <stdlib.h>
 
 #define ERROR 0
 #define INT 1

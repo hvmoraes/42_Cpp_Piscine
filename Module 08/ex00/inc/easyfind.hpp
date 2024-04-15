@@ -2,9 +2,8 @@
 
 #include <iostream>
 #include <algorithm>
-#include <array>
+#include <vector>
 #include <deque>
-#include <forward_list>
 #include <list>
 
 template <typename T>

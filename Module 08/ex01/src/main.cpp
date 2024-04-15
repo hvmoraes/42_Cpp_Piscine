@@ -6,18 +6,18 @@ int main() {
 	try {
 		span1.addNumber(2);
 	}
-	catch(const std::exception& e) {
+	catch(Span::arrayFull& e) {
 		std::cerr << e.what() << '\n';
 	}
 	span.addNumber(-1);
-	span.addNumber(5);
+	span.addNumber(6);
 	span.addNumber(2);
 	span.addNumber(10);
-	span.addNumber(6);
+	span.addNumber(5);
 	try {
 		span.addNumber(10);
 	}
-	catch(const std::exception& e) {
+	catch(Span::arrayFull& e) {
 		std::cerr << e.what() << '\n';
 	}
 	std::cout << span.shortestSpan() << std::endl;
@@ -26,7 +26,7 @@ int main() {
 	{
 		std::cout << span1.shortestSpan() << std::endl;
 	}
-	catch(const std::exception& e)
+	catch(Span::noSpan& e)
 	{
 		std::cerr << e.what() << '\n';
 	}

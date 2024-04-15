@@ -4,11 +4,11 @@
 #include <iostream>
 #include <fcntl.h>
 #include <unistd.h>
-#include <regex>
 #include <vector>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstdlib>
 
 #define print(x) std::cout << x << std::endl
 #define out std::cout

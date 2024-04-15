@@ -22,11 +22,11 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& copy) {
 }
 
 int BitcoinExchange::parse() {
-	if (!regex_match(this->argv[1], std::regex("(.*)(.txt)"))) {
+	if (std::string(argv[1]).find(".txt") == std::string::npos) {
 		out << "\033[31mError: wrong file extension => " << this->argv[1] << "\033[0m" << el;
 		return (0);
 	}
-	if (!regex_match(this->argv[2], std::regex("(.*)(.csv)"))) {
+	if (std::string(argv[2]).find(".csv") == std::string::npos) {
 		out << "\033[31mError: wrong file extension => " << this->argv[2] << "\033[0m" << el;
 		return (0);
 	}
@@ -74,15 +74,15 @@ int parseDate(std::string date, std::string str) {
   std::getline(ss, month, '-');
   std::getline(ss, day);
 
-	if (std::stoll(year) < 2009 || std::stoll(year) > 2022) {
+	if (atoi(year.c_str()) < 2009 || atoi(year.c_str()) > 2022) {
 		out << "\033[31mError: invalid year " << str << "\033[0m" << el;
 		return (0);
 	}
-	if (std::stoll(month) < 0 || std::stoll(month) > 12) {
+	if (atoi(month.c_str()) < 0 || atoi(month.c_str()) > 12) {
 		out << "\033[31mError: invalid month " << str << "\033[0m" << el;
 		return (0);
 	}
-	if (std::stoll(day) < 0 || std::stoll(day) > 31) {
+	if (atoi(day.c_str()) < 0 || atoi(day.c_str()) > 31) {
 		out << "\033[31mError: invalid day " << str << "\033[0m" << el;
 		return (0);
 	}
@@ -94,7 +94,7 @@ int parseValue(std::string value, std::string str) {
 		out << "\033[31mError: no value provided => " << str << "\033[0m" << el;
 		return (0);
 	}
-	if (std::stoll(value) < 0 || std::stoll(value) > 2147483647) {
+	if (atof(value.c_str()) < 0 || atof(value.c_str()) > 2147483647) {
 		out << "\033[31mError: invalid value => " << str << "\033[0m" << el;
 		return (0);
 	}
@@ -115,7 +115,7 @@ float getValue(std::string str) {
 	size_t commaPos = str.find(',');
 	if (commaPos != std::string::npos) {
 		std::string afterComma = str.substr(commaPos + 1);
-		return (stof(afterComma));
+		return (atof(afterComma.c_str()));
 	}
 	out << "\033[31mError: invalid line => " << str << "\033[0m" << el;
 	return (-1);
@@ -131,7 +131,7 @@ void BitcoinExchange::search(int i) {
 			nbr = getValue(line);
 			if (nbr == -1)
 				return;
-			out << "\033[32m" << this->date[i] << " => " << this->value[i] << " = " << nbr * stof(this->value[i]) << "\033[0m" << el;
+			out << "\033[32m" << this->date[i] << " => " << this->value[i] << " = " << nbr * atof(this->value[i].c_str()) << "\033[0m" << el;
 		}
 	}
 }
