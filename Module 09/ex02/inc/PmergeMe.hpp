@@ -5,7 +5,8 @@
 #include <algorithm>
 #include <list>
 #include <deque>
-#include <chrono>
+#include <cstring>
+#include <ctime>
 
 #define print(x) std::cout << x << std::endl
 #define out std::cout

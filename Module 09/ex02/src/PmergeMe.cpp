@@ -33,12 +33,12 @@ int PmergeMe::parse() {
 
 void PmergeMe::initList() {
 	for (int i = 1; i < this->size; i++)
-		this->list.push_back(std::stoi(this->input[i]));
+		this->list.push_back(std:: atoi(this->input[i]));
 }
 
 void PmergeMe::initDeque() {
 	for (int i = 1; i < this->size; i++)
-		this->deque.push_back(std::stoi(this->input[i]));
+		this->deque.push_back(std:: atoi(this->input[i]));
 }
 
 void	PmergeMe::showList() {
@@ -167,53 +167,51 @@ void PmergeMe::showInput() {
 		out << this->input[i] << " ";
 }
 
-void toPicoseconds(std::chrono::duration<double> duration) {
-	float checkDuration = duration.count();
-	if (checkDuration * 1000000000000 > 0.1 && checkDuration * 1000000000000 < 100)
-		out << checkDuration * 1000000000000 << "ps";
-	else if (checkDuration * 1000000000 > 0.1 && checkDuration * 1000000000 < 100)
-		out << checkDuration * 1000000000 << "ns";
-	else if (checkDuration * 1000000 > 0.1 && checkDuration * 1000000 < 100)
-		out << checkDuration * 1000000 << "μs";
-	else if (checkDuration * 1000 > 0.1 && checkDuration * 1000 < 100)
-		out << checkDuration * 1000 << "ms";
-	else if (checkDuration > 0.1 && checkDuration < 100)
-		out << checkDuration << "s";
+void toPicoseconds(double duration) {
+    if (duration * 1000000000000 > 0.1 && duration * 1000000000000 < 100)
+        std::cout << duration * 1000000000000 << "ps";
+    else if (duration * 1000000000 > 0.1 && duration * 1000000000 < 100)
+        std::cout << duration * 1000000000 << "ns";
+    else if (duration * 1000000 > 0.1 && duration * 1000000 < 100)
+        std::cout << duration * 1000000 << "μs";
+    else if (duration * 1000 > 0.1 && duration * 1000 < 100)
+        std::cout << duration * 1000 << "ms";
+    else if (duration > 0.1 && duration < 100)
+        std::cout << duration << "s";
 }
 
-
 int PmergeMe::sort() {
-	if (!this->parse())
-		return (0);
+    if (!this->parse())
+        return 0;
 
-	out << "Before sort: ";
-	//this->showInput();
+    std::cout << "Before sort: ";
+    this->showInput();
 
-	std::chrono::high_resolution_clock::time_point listStart = std::chrono::high_resolution_clock::now();
-	this->initList();
-	this->sortList(this->list);
-	std::chrono::high_resolution_clock::time_point listEnd = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> listDuration = listEnd - listStart;
+    clock_t listStart = clock();
+    this->initList();
+    this->sortList(this->list);
+    clock_t listEnd = clock();
+    double listDuration = (double)(listEnd - listStart) / CLOCKS_PER_SEC;
 
-	std::chrono::high_resolution_clock::time_point dequeStart = std::chrono::high_resolution_clock::now();
-	this->initDeque();
-	this->sortDeque(this->deque);
-	std::chrono::high_resolution_clock::time_point dequeEnd = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> dequeDuration = dequeEnd - dequeStart;
+    clock_t dequeStart = clock();
+    this->initDeque();
+    this->sortDeque(this->deque);
+    clock_t dequeEnd = clock();
+    double dequeDuration = (double)(dequeEnd - dequeStart) / CLOCKS_PER_SEC;
 
-	out << el << el << "After sort: " << el;
-	//this->showList();
-	out << el;
+    std::cout << std::endl << std::endl << "After sort: " << std::endl;
+    this->showList();
+    std::cout << std::endl;
 
-	out << "Duration (list): ";
-	toPicoseconds(listDuration);
-	out << el;
+    std::cout << "Duration (list): ";
+    toPicoseconds(listDuration);
+    std::cout << std::endl;
 
-	//this->showDeque();
-	out << el;
+    this->showDeque();
+    std::cout << std::endl;
 
-	out << "Duration (deque): ";
-	toPicoseconds(dequeDuration);
-	out << el;
-	return (1);
+    std::cout << "Duration (deque): ";
+    toPicoseconds(dequeDuration);
+    std::cout << std::endl;
+    return 1;
 }
