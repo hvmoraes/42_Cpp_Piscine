@@ -39,24 +39,24 @@ void PmergeMe::showInput() {
 
 void	PmergeMe::showVector() {
 	out << "Vector: ";
-	int	i = 1;
+	int	i = 0;
 	if (this->size > 10) {
-		while (i < 6) {
+		while (i < 5) {
 			out << vector[i] << " ";
 			i++;
 		}
 		out << "[...] ";
-		while (i < this->size - 5) {
+		while (i < this->size - 6) {
 			i++;
 			continue;
 		}
-		while (i < this->size) {
+		while (i < this->size - 1) {
 			out << vector[i] << " ";
 			i++;
 		}
 	}
 	else {
-		while (i < this->size) {
+		while (i < this->size - 1) {
 			out << vector[i] << " ";
 			i++;
 		}

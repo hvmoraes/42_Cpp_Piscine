@@ -12,7 +12,7 @@ void PmergeMe::sortPairsRecursiveDeque(size_t size)
 {
 	if (size >= deque.size())
 		return ;
-	for (size_t i = 1; i < deque.size() - 1; i+=2) {
+	for (size_t i = 1; i < deque.size() - 1; i += 2) {
         if (deque[i] > deque[size]) {
 			std::swap(deque[i], deque[size]);
 			std::swap(deque[i - 1], deque[size - 1]);

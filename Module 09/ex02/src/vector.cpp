@@ -2,10 +2,9 @@
 
 void    PmergeMe::sortPairVector()
 {
-	for (size_t i = 0; i + 1 < vector.size(); i += 2)
-	{
-		if (this->vector[i + 1] && this->vector[i] > this->vector[i + 1])
-			iter_swap(vector.begin() + i, vector.begin() + i + 1);
+	for (size_t i = 0; i + 1 < vector.size(); i += 2) {
+		if (this->vector[i + 1] && vector[i] > vector[i + 1])
+			std::swap(vector[i], vector[i + 1]);
 	}
 }
 
@@ -14,7 +13,7 @@ void	PmergeMe::sortPairsRecursiveVector(size_t size)
 {
 	if (size >= vector.size())
 		return ;
-	for (size_t i = 1; i < vector.size() - 1; i+=2) {
+	for (size_t i = 1; i < vector.size() - 1; i += 2) {
 		if (vector[i] > vector[size]) {
 			std::swap(vector[i], vector[size]);
 			std::swap(vector[i - 1], vector[size - 1]);
@@ -30,8 +29,7 @@ void    PmergeMe::sortVector()
 
 	int odd = 0;
 	int last = vector[vector.size() - 1];
-	if (vector.size() % 2 != 0)
-	{
+	if (vector.size() % 2 != 0) {
 		odd = 1;
 		vector.erase(vector.end() - 1);
 	}
