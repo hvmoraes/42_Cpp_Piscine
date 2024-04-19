@@ -121,17 +121,17 @@ float getValue(std::string str) {
 	return (-1);
 }
 
-void BitcoinExchange::search(int i) {
+void BitcoinExchange::search(std::string date, std::string value) {
 	std::string line;
 	float nbr;
 	this->fdData.clear();
   this->fdData.seekg(0);
 	while (getline(this->fdData, line)) {
-		if (line.find(this->date[i]) != std::string::npos) {
+		if (line.find(date) != std::string::npos) {
 			nbr = getValue(line);
 			if (nbr == -1)
 				return;
-			out << "\033[32m" << this->date[i] << " => " << this->value[i] << " = " << nbr * atof(this->value[i].c_str()) << "\033[0m" << el;
+			out << "\033[32m" << date << " => " << value << " = " << nbr * atof(value.c_str()) << "\033[0m" << el;
 		}
 	}
 }
@@ -143,12 +143,9 @@ void BitcoinExchange::initInput() {
 	int i = 0;
 	while (getline(this->fdInput, str)) {
 		if (parseInput(str, &date, &value)) {
-			this->date.push_back(date);
-			this->value.push_back(value);
-			this->search(i);
-			//print(this->date.at(i));
-			//print(this->value.at(i));
+			this->data.insert(std::make_pair(date, value));
+			this->search(date, value);
 			i++;
 		}
-	}	
+	}
 }

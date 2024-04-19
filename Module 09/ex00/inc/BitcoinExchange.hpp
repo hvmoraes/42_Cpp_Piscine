@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <vector>
+#include <map>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -22,6 +23,7 @@ class BitcoinExchange {
 	public:
 		std::ifstream fdInput;
 		std::ifstream fdData;
+		std::map<std::string, std::string> data;
 		std::vector<std::string> date;
 		std::vector<std::string> value;
 		char **argv;
@@ -34,7 +36,7 @@ class BitcoinExchange {
 		int parse();
 		int open();
 		void initInput();
-		void search(int i);
+		void search(std::string date, std::string value);
 };
 
 #endif
