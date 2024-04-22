@@ -8,7 +8,7 @@ void    PmergeMe::sortPairVector()
 	}
 }
 
-// recursive function to sort pairs
+// Recursive function to sort pairs
 void	PmergeMe::sortPairsRecursiveVector(size_t size)
 {
 	if (size >= vector.size())
@@ -24,7 +24,7 @@ void	PmergeMe::sortPairsRecursiveVector(size_t size)
 
 void    PmergeMe::sortVector()
 {
-	// sort each pair
+	// Sort each pair
 	this->sortPairVector();
 
 	int odd = 0;
@@ -34,7 +34,7 @@ void    PmergeMe::sortVector()
 		vector.erase(vector.end() - 1);
 	}
 
-	// sort pairs recursively (according to highest value)
+	// Sort pairs recursively (according to highest value)
 	sortPairsRecursiveVector(1);
 
 	if (odd == 1)

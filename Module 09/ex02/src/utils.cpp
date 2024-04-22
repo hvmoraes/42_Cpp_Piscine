@@ -96,35 +96,35 @@ void PmergeMe::showDeque() {
 }
 
 void PmergeMe::convertTime(double duration) {
-    if (duration * 1000000000000 > 0.1 && duration * 1000000000000 < 100)
-        std::cout << duration * 1000000000000 << "ps";
-    else if (duration * 1000000000 > 0.1 && duration * 1000000000 < 100)
-        std::cout << duration * 1000000000 << "ns";
-    else if (duration * 1000000 > 0.1 && duration * 1000000 < 100)
-        std::cout << duration * 1000000 << "μs";
-    else if (duration * 1000 > 0.1 && duration * 1000 < 100)
-        std::cout << duration * 1000 << "ms";
-    else if (duration > 0.1 && duration < 100)
-        std::cout << duration << "s";
+	if (duration * 1000000000000 > 0.1 && duration * 1000000000000 < 100)
+		std::cout << duration * 1000000000000 << "ps";
+	else if (duration * 1000000000 > 0.1 && duration * 1000000000 < 100)
+		std::cout << duration * 1000000000 << "ns";
+	else if (duration * 1000000 > 0.1 && duration * 1000000 < 100)
+		std::cout << duration * 1000000 << "μs";
+	else if (duration * 1000 > 0.1 && duration * 1000 < 100)
+		std::cout << duration * 1000 << "ms";
+	else if (duration > 0.1 && duration < 100)
+		std::cout << duration << "s";
 }
 
 size_t  jacobsthalEquation(int order)
 {
-    if (order == 1)
-        return 1;
-    else
-        return ((std::pow(2, order) - std::pow(-1, order)) / 3);
+	if (order == 1)
+		return 1;
+	else
+		return ((std::pow(2, order) - std::pow(-1, order)) / 3);
 }
 
 size_t  PmergeMe::getJacobsthal(size_t i, size_t *jacob_order, size_t *smaller_index)
 {
-    if (i - 1 != 0 && i - 1 != jacobsthalEquation(*jacob_order - 1)) // decrementing elements after the jc number
-        i--;
-    else // next jc number and first element cases
-    {
-        (*jacob_order)++;
-        *smaller_index = i;
-        i = jacobsthalEquation(*jacob_order);
-    }
-    return i;
+	if (i - 1 != 0 && i - 1 != jacobsthalEquation(*jacob_order - 1)) // Decrementing elements after the jc number
+		i--;
+	else // Next jc number and first element cases
+	{
+		(*jacob_order)++;
+		*smaller_index = i;
+		i = jacobsthalEquation(*jacob_order);
+	}
+	return i;
 }

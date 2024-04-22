@@ -124,16 +124,26 @@ float getValue(std::string str) {
 void BitcoinExchange::search(std::string date, std::string value) {
 	std::string line;
 	float nbr;
+	float closestLowerNbr = -1;
+  std::string closestLowerDate;
+
 	this->fdData.clear();
   this->fdData.seekg(0);
 	while (getline(this->fdData, line)) {
-		if (line.find(date) != std::string::npos) {
-			nbr = getValue(line);
-			if (nbr == -1)
-				return;
-			out << "\033[32m" << date << " => " << value << " = " << nbr * atof(value.c_str()) << "\033[0m" << el;
+		std::string currentDate = line.substr(0, 10);
+		if (currentDate <= date) {
+			if (currentDate > closestLowerDate || closestLowerDate.empty()) {
+				closestLowerDate = currentDate;
+				nbr = getValue(line);
+				closestLowerNbr = nbr;
+			}
 		}
 	}
+
+	if (closestLowerNbr != -1)
+		std::cout << "\033[32m" << closestLowerDate << " => " << value << " = " << closestLowerNbr * atof(value.c_str()) << "\033[0m" << std::endl;
+	else
+		std::cout << "No matching or lower date found." << std::endl;
 }
 
 void BitcoinExchange::initInput() {

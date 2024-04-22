@@ -24,7 +24,6 @@ class PmergeMe {
 		std::vector<int> vector;
 		std::deque<int> deque;
 
-		// Canonical Form
 		PmergeMe(int argc, char **argv);
 		~PmergeMe();
 		PmergeMe(const PmergeMe& copy);
@@ -54,68 +53,67 @@ class PmergeMe {
 
 		// Template Functions
 		template <typename T>
-		static size_t insertionIndex(T ct, int target)
+		static size_t insertionIndex(T vd, int target)
 		{
-				int high = ct.size() - 1;
-				int low = 0;
-				while (low <= high)
-				{
-						size_t mid = std::floor((high + low) / 2);
-						if (ct[mid] == target)
-								return mid;
-						else if (ct[mid] > target)
-								high = mid - 1;
-						else
-								low = mid + 1;
-				}
-				return low;
+			int high = vd.size() - 1;
+			int low = 0;
+			while (low <= high)
+			{
+				size_t mid = std::floor((high + low) / 2);
+				if (vd[mid] == target)
+					return mid;
+				else if (vd[mid] > target)
+					high = mid - 1;
+				else
+					low = mid + 1;
+			}
+			return low;
 		}
 
-		// inserts the pend vector in the main chain
+		// Inserts the pend vector in the main chain
 		template <typename T>
 		T    insertB(T &a, T &b)
 		{
-				size_t aux = 1;
-				size_t f = 0;
-				size_t smaller_index = 1;
-				size_t jacob_order = 1;
+			size_t aux = 1;
+			size_t f = 0;
+			size_t smaller_index = 1;
+			size_t jacob_order = 1;
 
-				int index_b;
-				while (f < b.size())
-				{
-						// uses the jacobshtal number to get the index of the
-						// next element of b to insert in a
-						aux = getJacobsthal(aux, &jacob_order, &smaller_index);
-						while (aux > b.size())
-								aux--;
-						index_b = aux - 1;
+			int index_b;
+			while (f < b.size())
+			{
+				// Uses the jacobshtal number to get the index of the next element of b to insert in a
+				aux = getJacobsthal(aux, &jacob_order, &smaller_index);
+				while (aux > b.size())
+						aux--;
+				index_b = aux - 1;
 
-						// binary search and insertion of b in a
-						size_t index = insertionIndex(a, b[index_b]);
-						a.insert(a.begin() + index, b[index_b]);
+				// Binary search and insertion of b in a
+				size_t index = insertionIndex(a, b[index_b]);
+				a.insert(a.begin() + index, b[index_b]);
 
-						f++;
-				}
-				return (a);
+				f++;
+			}
+			return (a);
 		}
 
 		// a main chain vector: high values of each pair
 		// b pend elements vector: low values of each pair
 		template <typename T>
-		std::pair<T,T > getAB(T &v)
+		std::pair<T,T > getAB(T &vd)
 		{
-				T a;
-				T b;
-				typename T::iterator it = v.begin();
-				while (it + 1 != v.end() && it != v.end())
-				{
-						b.push_back(*it);
-						a.push_back(*(it + 1));
-						std::advance(it, 2);
-				}
-				if (it != v.end())
-						b.push_back(*it);
-				return std::make_pair(a, b);
+			T a;
+			T b;
+			typename T::iterator it = vd.begin();
+			while (it + 1 != vd.end() && it != vd.end())
+			{
+				b.push_back(*it);
+				a.push_back(*(it + 1));
+				std::advance(it, 2);
+			}
+			if (it != vd.end())
+				b.push_back(*it);
+			return std::make_pair(a, b);
 		}
 };
 

@@ -22,7 +22,7 @@ void PmergeMe::sortPairsRecursiveDeque(size_t size)
 }
 
 void PmergeMe::sortDeque() {
-	// sort each pair
+	// Sort each pair
 	this->sortPairDeque();
 
 	int odd = 0;
@@ -32,7 +32,7 @@ void PmergeMe::sortDeque() {
 		deque.erase(deque.end() - 1);
 	}
 
-	// sort pairs recursively (according to highest value)
+	// Sort pairs recursively (according to highest value)
 	sortPairsRecursiveDeque(1);
 
 	if (odd == 1)
