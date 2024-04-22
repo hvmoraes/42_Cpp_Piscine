@@ -32,6 +32,7 @@ class BitcoinExchange {
 
 		int parse();
 		int open();
+		int	header();
 		void initInput();
 		void search(std::string date, std::string value);
 };

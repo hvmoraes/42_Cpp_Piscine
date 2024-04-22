@@ -22,7 +22,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& copy) {
 }
 
 int BitcoinExchange::parse() {
-	if (std::string(argv[1]).find(".txt") == std::string::npos) {
+	if (std::string(argv[1]).find(".txt") == std::string::npos && std::string(argv[1]).find(".csv") == std::string::npos) {
 		out << "\033[31mError: wrong file extension => " << this->argv[1] << "\033[0m" << el;
 		return (0);
 	}
@@ -47,24 +47,58 @@ int BitcoinExchange::open() {
 	return (1);
 }
 
-std::string trimDate(std::string str) {
-	std::string value;
-	size_t pos = str.find('|');
-	value = str.substr(0, pos);
-  value.erase(value.find_last_not_of(" \t\n\r\f\v") + 1);
-	value.erase(0, value.find_first_not_of(" \t\n\r\f\v"));
-	return (value);
+std::string trimHeader(std::string header) {
+	std::string result = header;
+	result.erase(result.find_last_not_of(" \t\n\r\f\v") + 1);
+	result.erase(0, result.find_first_not_of(" \t\n\r\f\v"));
+	return (result);
 }
 
-std::string trimValue(std::string str) {
-	std::string value;
-	size_t pos = str.find('|');
+std::string putOneSpace(std::string str) {
+	std::istringstream iss(str);
+	std::ostringstream oss;
+	std::string word;
+
+	while (iss >> word) {
+			oss << word << ' ';
+	}
+
+	std::string result = oss.str();
+	return (result);
+}
+
+int	BitcoinExchange::header() {
+	std::string header;
+
+	getline(this->fdInput, header);
+	header = putOneSpace(header);
+	header = trimHeader(header);
+	out << "\"" << header << "\"" << el;
+	if (header != "date | value") {
+		out << "\033[31mError: No header (\"date | value\") present at start of file => " << this->argv[1] << "\033[0m" << el;
+		return (0);
+	}
+	return (1);
+}
+
+std::string trimDate(std::string date) {
+	std::string result;
+	size_t pos = date.find('|');
+	result = date.substr(0, pos);
+  result.erase(result.find_last_not_of(" \t\n\r\f\v") + 1);
+	result.erase(0, result.find_first_not_of(" \t\n\r\f\v"));
+	return (result);
+}
+
+std::string trimValue(std::string value) {
+	std::string result;
+	size_t pos = value.find('|');
 	if (pos != std::string::npos) {
-		value = str.substr(pos + 1);
-    value.erase(value.find_last_not_of(" \t\n\r\f\v") + 1);
-		value.erase(0, value.find_first_not_of(" \t\n\r\f\v"));
+		result = value.substr(pos + 1);
+    result.erase(result.find_last_not_of(" \t\n\r\f\v") + 1);
+		result.erase(0, result.find_first_not_of(" \t\n\r\f\v"));
   }
-	return (value);
+	return (result);
 }
 
 int parseDate(std::string date, std::string str) {
@@ -74,16 +108,20 @@ int parseDate(std::string date, std::string str) {
   std::getline(ss, month, '-');
   std::getline(ss, day);
 
+	if (date == "") {
+		out << "\033[31mError: No date provided\033[0m" << el;
+		return (0);
+	}
 	if (atoi(year.c_str()) < 2009 || atoi(year.c_str()) > 2022) {
-		out << "\033[31mError: invalid year " << str << "\033[0m" << el;
+		out << "\033[31mError: Invalid year " << trimDate(putOneSpace(str)) << "\033[0m" << el;
 		return (0);
 	}
 	if (atoi(month.c_str()) < 0 || atoi(month.c_str()) > 12) {
-		out << "\033[31mError: invalid month " << str << "\033[0m" << el;
+		out << "\033[31mError: Invalid month " << trimDate(putOneSpace(str)) << "\033[0m" << el;
 		return (0);
 	}
 	if (atoi(day.c_str()) < 0 || atoi(day.c_str()) > 31) {
-		out << "\033[31mError: invalid day " << str << "\033[0m" << el;
+		out << "\033[31mError: Invalid day " << trimDate(putOneSpace(str)) << "\033[0m" << el;
 		return (0);
 	}
 	return (1);
@@ -91,18 +129,20 @@ int parseDate(std::string date, std::string str) {
 
 int parseValue(std::string value, std::string str) {
 	if (value == "")	{
-		out << "\033[31mError: no value provided => " << str << "\033[0m" << el;
+		out << "\033[31mError: No value provided\033[0m" << el;
 		return (0);
 	}
-	if (atof(value.c_str()) < 0 || atof(value.c_str()) > 2147483647) {
-		out << "\033[31mError: invalid value => " << str << "\033[0m" << el;
+	if (atof(value.c_str()) < 0 || atof(value.c_str()) > 1000) {
+		out << "\033[31mError: Invalid value => " << trimValue(putOneSpace(str)) << "\033[0m" << el;
 		return (0);
 	}
 	return (1);
 }
 
 int parseInput(std::string str, std::string *date, std::string *value) {
+	*date = putOneSpace(*date);
 	*date = trimDate(str);
+	*value = putOneSpace(*value);
 	*value = trimValue(str);
 	if (!parseDate(*date, str))
 		return (0);
@@ -117,7 +157,7 @@ float getValue(std::string str) {
 		std::string afterComma = str.substr(commaPos + 1);
 		return (atof(afterComma.c_str()));
 	}
-	out << "\033[31mError: invalid line => " << str << "\033[0m" << el;
+	out << "\033[31mError: Invalid line => " << str << "\033[0m" << el;
 	return (-1);
 }
 
@@ -143,7 +183,7 @@ void BitcoinExchange::search(std::string date, std::string value) {
 	if (closestLowerNbr != -1)
 		std::cout << "\033[32m" << closestLowerDate << " => " << value << " = " << closestLowerNbr * atof(value.c_str()) << "\033[0m" << std::endl;
 	else
-		std::cout << "No matching or lower date found." << std::endl;
+		std::cout << "\033[31mError: No closer date found in DataBase => " << trimDate(putOneSpace(date)) << "\033[0m" << std::endl;
 }
 
 void BitcoinExchange::initInput() {

@@ -9,6 +9,8 @@ int main(int argc, char **argv) {
 			return (0);
 		if (!bitcoin.open())
 			return (0);
+		if (!bitcoin.header())
+			return (0);
 		bitcoin.initInput();
 	}
 	return (1);

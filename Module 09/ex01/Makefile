@@ -3,7 +3,7 @@ RED			=	\033[0;31m
 YELLOW	=	\033[0;33m
 END			=	\033[0m
 
-NAME		=	rpn
+NAME		=	RPN
 
 SRCS		=	$(wildcard src/*.cpp)
 
@@ -11,11 +11,11 @@ OBJ_DIR =	obj
 OBJS    =	$(addprefix $(OBJ_DIR)/,$(notdir $(SRCS:.cpp=.o)))
 
 CC			=	c++
-CFLAGS	=	-Wall -Wextra -Werror -I./inc -fsanitize=address -std=c++98
+CFLAGS	=	-Wall -Wextra -Werror -I./inc -std=c++98
 RM			= rm -rf
 
 all:			$(NAME)
-					@echo "$(GREEN)rpn successfully compiled!$(END)"
+					@echo "$(GREEN)RPN successfully compiled!$(END)"
 					@sleep 0.5
 					@clear
 
@@ -24,7 +24,7 @@ $(OBJ_DIR)/%.o:	src/%.cpp | $(OBJ_DIR)
 
 $(NAME):	$(OBJS)
 					@clear
-					@echo "$(YELLOW)Compiling rpn...$(END)"
+					@echo "$(YELLOW)Compiling RPN...$(END)"
 					@$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 
 $(OBJ_DIR):
